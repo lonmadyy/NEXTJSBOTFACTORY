@@ -3,7 +3,15 @@
 import { useEffect, useRef, useState } from 'react'
 
 export default function CustomCursor() {
-  const [enabled, setEnabled] = useState(false)
+  const [enabled] = useState(() => {
+    if (typeof window === 'undefined') return false
+
+    const hoverMedia = window.matchMedia('(hover: hover) and (pointer: fine)')
+    const reduceMotionMedia = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const desktopMedia = window.matchMedia('(min-width: 768px)')
+
+    return hoverMedia.matches && !reduceMotionMedia.matches && desktopMedia.matches
+  })
   const outerRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
   const positionRef = useRef({ x: 0, y: 0 })
@@ -17,7 +25,6 @@ export default function CustomCursor() {
     const canUseCursor =
       hoverMedia.matches && !reduceMotionMedia.matches && desktopMedia.matches
 
-    setEnabled(canUseCursor)
     if (!canUseCursor) return
 
     document.body.style.cursor = 'none'

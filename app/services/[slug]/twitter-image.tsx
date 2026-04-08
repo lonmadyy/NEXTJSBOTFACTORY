@@ -8,13 +8,14 @@ export const contentType = socialContentType
 export const runtime = 'edge'
 
 type ImageProps = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
-export default function ServiceTwitterImage({ params }: ImageProps) {
-  const service = serviceLandings.find((item) => item.slug === params.slug)
+export default async function ServiceTwitterImage({ params }: ImageProps) {
+  const { slug } = await params
+  const service = serviceLandings.find((item) => item.slug === slug)
 
   if (!service) {
     notFound()

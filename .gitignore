@@ -20,3 +20,4 @@ output/
 .playwright-mcp/
 audit-mobile-*.png
 *.zip
+.vercel

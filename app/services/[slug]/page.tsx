@@ -4,9 +4,9 @@ import ServiceLandingTemplate from '@/components/seo/ServiceLandingTemplate'
 import { serviceLandings, siteConfig } from '@/lib/site'
 
 type Params = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 const serviceMap = new Map(serviceLandings.map((item) => [item.slug, item]))
@@ -16,8 +16,9 @@ export function generateStaticParams() {
   return serviceLandings.map((service) => ({ slug: service.slug }))
 }
 
-export function generateMetadata({ params }: Params): Metadata {
-  const service = serviceMap.get(params.slug as (typeof serviceLandings)[number]['slug'])
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params
+  const service = serviceMap.get(slug as (typeof serviceLandings)[number]['slug'])
   if (!service) {
     return {
       title: 'Услуга не найдена',
@@ -46,8 +47,9 @@ export function generateMetadata({ params }: Params): Metadata {
   }
 }
 
-export default function ServiceLandingPage({ params }: Params) {
-  const service = serviceMap.get(params.slug as (typeof serviceLandings)[number]['slug'])
+export default async function ServiceLandingPage({ params }: Params) {
+  const { slug } = await params
+  const service = serviceMap.get(slug as (typeof serviceLandings)[number]['slug'])
   if (!service) notFound()
 
   return <ServiceLandingTemplate service={service} />
