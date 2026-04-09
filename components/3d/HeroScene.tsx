@@ -71,26 +71,26 @@ function AnimatedSphere({ isMobile }: { isMobile: boolean }) {
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.2
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.3
+      meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.16
+      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.24
     }
   })
 
   return (
     <Float
-      speed={2}
-      rotationIntensity={1.5}
-      floatIntensity={isMobile ? 1.5 : 2}
+      speed={isMobile ? 1.55 : 1.75}
+      rotationIntensity={isMobile ? 0.9 : 1.2}
+      floatIntensity={isMobile ? 1.1 : 1.6}
     >
       <Sphere
         args={[1.5, segments, segments]}
         ref={meshRef}
       >
-         <MeshDistortMaterial
+          <MeshDistortMaterial
           color="#1A1A1A"
           attach="material"
-          distort={isMobile ? 0.42 : 0.5}
-          speed={isMobile ? 1.6 : 2}
+          distort={isMobile ? 0.34 : 0.45}
+          speed={isMobile ? 1.35 : 1.85}
           roughness={0.2}
           metalness={0.9}
         />
