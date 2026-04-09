@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Manrope, Syne } from 'next/font/google' // Premium Tech Fonts
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import SmoothScroll from '@/components/providers/SmoothScroll'
 import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
 import { primaryKeywords, siteConfig } from '@/lib/site'
@@ -84,6 +85,7 @@ export default function RootLayout({
             {children}
           </main>
         </SmoothScroll>
+        <SpeedInsights />
       </body>
     </html>
   )
