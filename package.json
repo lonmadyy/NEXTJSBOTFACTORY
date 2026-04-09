@@ -11,7 +11,7 @@
     "pre-release": "powershell -ExecutionPolicy Bypass -File ./scripts/pre-release.ps1"
   },
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
