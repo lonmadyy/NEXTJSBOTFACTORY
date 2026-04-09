@@ -1,9 +1,51 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useSyncExternalStore } from 'react'
+
+function subscribeToCursorCapability(onStoreChange: () => void) {
+  if (typeof window === 'undefined') {
+    return () => undefined
+  }
+
+  const queries = [
+    window.matchMedia('(hover: hover) and (pointer: fine)'),
+    window.matchMedia('(prefers-reduced-motion: reduce)'),
+    window.matchMedia('(min-width: 768px)'),
+  ]
+
+  const unsubscribe = queries.map((query) => {
+    if (typeof query.addEventListener === 'function') {
+      query.addEventListener('change', onStoreChange)
+      return () => query.removeEventListener('change', onStoreChange)
+    }
+
+    query.addListener(onStoreChange)
+    return () => query.removeListener(onStoreChange)
+  })
+
+  return () => {
+    unsubscribe.forEach((cleanup) => cleanup())
+  }
+}
+
+function getCursorCapabilitySnapshot() {
+  if (typeof window === 'undefined') {
+    return false
+  }
+
+  const hoverMedia = window.matchMedia('(hover: hover) and (pointer: fine)')
+  const reduceMotionMedia = window.matchMedia('(prefers-reduced-motion: reduce)')
+  const desktopMedia = window.matchMedia('(min-width: 768px)')
+
+  return hoverMedia.matches && !reduceMotionMedia.matches && desktopMedia.matches
+}
 
 export default function CustomCursor() {
-  const [enabled, setEnabled] = useState(false)
+  const enabled = useSyncExternalStore(
+    subscribeToCursorCapability,
+    getCursorCapabilitySnapshot,
+    () => false
+  )
   const outerRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
   const positionRef = useRef({ x: 0, y: 0 })
@@ -17,7 +59,6 @@ export default function CustomCursor() {
     const canUseCursor =
       hoverMedia.matches && !reduceMotionMedia.matches && desktopMedia.matches
 
-    setEnabled(canUseCursor)
     if (!canUseCursor) return
 
     document.body.style.cursor = 'none'

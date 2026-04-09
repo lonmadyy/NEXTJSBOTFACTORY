@@ -115,16 +115,20 @@ function AnimatedSphere({ isMobile }: { isMobile: boolean }) {
 }
 
 export default function HeroScene() {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(max-width: 767px)').matches
+  })
   const [isReady, setIsReady] = useState(false)
-  const [isWebGLAvailable, setIsWebGLAvailable] = useState(true)
+  const [isWebGLAvailable] = useState(() => {
+    if (typeof window === 'undefined') return true
+    return canUseWebGL()
+  })
   const [hasWebGLFailure, setHasWebGLFailure] = useState(false)
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 767px)')
     const updateMedia = () => setIsMobile(media.matches)
-    updateMedia()
-    setIsWebGLAvailable(canUseWebGL())
 
     const timeoutId = window.setTimeout(() => setIsReady(true), 90)
     media.addEventListener('change', updateMedia)
