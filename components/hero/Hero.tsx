@@ -18,6 +18,7 @@ export default function Hero() {
   const emailPopoverTimeoutRef = useRef<number | null>(null)
   const [isEmailCopied, setIsEmailCopied] = useState(false)
   const [isEmailPopoverVisible, setIsEmailPopoverVisible] = useState(false)
+  const [isSceneActive, setIsSceneActive] = useState(true)
 
   useEffect(() => {
     return () => {
@@ -27,6 +28,47 @@ export default function Hero() {
       if (emailPopoverTimeoutRef.current) {
         window.clearTimeout(emailPopoverTimeoutRef.current)
       }
+    }
+  }, [])
+
+  useEffect(() => {
+    const section = containerRef.current
+    if (!section) return
+
+    const syncSceneActivity = (isInViewport: boolean) => {
+      setIsSceneActive(isInViewport && document.visibilityState === 'visible')
+    }
+
+    const initialRect = section.getBoundingClientRect()
+    const initialViewportHeight = window.innerHeight || document.documentElement.clientHeight
+    const initialVisibleHeight = Math.min(initialRect.bottom, initialViewportHeight) - Math.max(initialRect.top, 0)
+    const initialRatio = initialRect.height > 0 ? initialVisibleHeight / initialRect.height : 0
+
+    syncSceneActivity(initialRatio > 0.18)
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        syncSceneActivity(entry.isIntersecting && entry.intersectionRatio > 0.18)
+      },
+      {
+        threshold: [0, 0.18, 0.35, 0.55, 0.8],
+      }
+    )
+
+    const handleVisibilityChange = () => {
+      const rect = section.getBoundingClientRect()
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+      const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0)
+      const ratio = rect.height > 0 ? visibleHeight / rect.height : 0
+      syncSceneActivity(ratio > 0.18)
+    }
+
+    observer.observe(section)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      observer.disconnect()
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [])
 
@@ -93,7 +135,7 @@ export default function Hero() {
       ref={containerRef}
       className="relative flex h-screen-safe w-full items-center justify-center overflow-hidden bg-[#050505] md:h-screen"
     >
-      <HeroScene />
+      <HeroScene sceneActive={isSceneActive} />
 
       <div className="hero-content-shell relative z-10 flex w-full max-w-screen flex-col items-center px-2 text-center md:px-0">
         <h1

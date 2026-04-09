@@ -65,23 +65,33 @@ function canUseWebGL() {
   }
 }
 
-function AnimatedSphere({ isMobile }: { isMobile: boolean }) {
+function AnimatedSphere({
+  isMobile,
+  sceneActive,
+}: {
+  isMobile: boolean
+  sceneActive: boolean
+}) {
   const meshRef = useRef<Mesh>(null)
+  const rotationTimeRef = useRef(0)
   const segments = isMobile ? 36 : 64
 
-  useFrame((state) => {
+  useFrame((_, delta) => {
+    if (!sceneActive) return
+
     if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.16
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.24
+      rotationTimeRef.current += delta
+      meshRef.current.rotation.x = rotationTimeRef.current * 0.16
+      meshRef.current.rotation.y = rotationTimeRef.current * 0.24
     }
   })
 
   return (
-    <Float
-      speed={isMobile ? 1.55 : 1.75}
-      rotationIntensity={isMobile ? 0.9 : 1.2}
-      floatIntensity={isMobile ? 1.1 : 1.6}
-    >
+      <Float
+        speed={isMobile ? 1.55 : 1.75}
+        rotationIntensity={isMobile ? 0.9 : 1.2}
+        floatIntensity={isMobile ? 1.1 : 1.6}
+      >
       <Sphere
         args={[1.5, segments, segments]}
         ref={meshRef}
@@ -99,7 +109,7 @@ function AnimatedSphere({ isMobile }: { isMobile: boolean }) {
   )
 }
 
-export default function HeroScene() {
+export default function HeroScene({ sceneActive = true }: { sceneActive?: boolean }) {
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window === 'undefined') return false
     return window.matchMedia('(max-width: 767px)').matches
@@ -140,6 +150,7 @@ export default function HeroScene() {
         >
           <Canvas
             dpr={dpr}
+            frameloop={sceneActive ? 'always' : 'demand'}
             fallback={<HeroSceneFallback />}
             camera={{ position: [0, 0, 5], fov: 45 }}
             gl={{
@@ -151,7 +162,7 @@ export default function HeroScene() {
             <ambientLight intensity={0.5} />
             <directionalLight position={[10, 10, 5]} intensity={1} />
             <Environment preset="city" resolution={isMobile ? 64 : 256} />
-            <AnimatedSphere isMobile={isMobile} />
+            <AnimatedSphere isMobile={isMobile} sceneActive={sceneActive} />
           </Canvas>
         </WebGLBoundary>
       )}
