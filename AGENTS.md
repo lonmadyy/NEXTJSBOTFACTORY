@@ -142,7 +142,9 @@ Key ownership:
 
 - Hero / first screen: `components/hero/Hero.tsx`
 - 3D hero canvas: `components/3d/HeroScene.tsx`
-- Services homepage section: `components/services/ServicesSection.tsx`
+- Services homepage runtime switch: `components/services/ServicesSection.tsx`
+- Desktop services experience: `components/services/ServicesSectionDesktop.tsx`
+- Mobile services experience: `components/services/ServicesSectionMobile.tsx`
 - Trust section: `components/trust/TrustSection.tsx`
 - Proof section: `components/proof/ProofSection.tsx`
 - Integrations marquee: `components/integrations/IntegrationsSection.tsx`
@@ -228,9 +230,12 @@ Known current hotspots:
 
 - homepage first screen runtime cost
 - WebGL hero on mobile
-- duplicated scroll listeners / section scanning
-- `ServicesSection` renders separate desktop and mobile trees in the same component and hides them with CSS
-- shared homepage client code leaks into otherwise simpler routes through the global layout shell
+- desktop `ServicesSection` horizontal pinning and GSAP scroll choreography
+- homepage scroll UI still relies on multiple fixed overlays that need careful coordination
+
+Services section note:
+
+- `ServicesSection` now renders a single viewport-specific branch and loads desktop/mobile variants from separate modules instead of keeping both DOM trees mounted at once.
 
 ## SEO Strategy
 
