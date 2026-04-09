@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useScrollUiState } from '@/components/layout/ScrollUiStateProvider'
 
 const navItems = [
   { href: '#hero', label: 'Главная' },
@@ -12,8 +13,7 @@ const navItems = [
 ]
 
 export default function StickyTopNav() {
-  const [progress, setProgress] = useState(0)
-  const [activeId, setActiveId] = useState('hero')
+  const { progress, storyActiveId: activeId } = useScrollUiState()
   const [isMobileNavHidden, setIsMobileNavHidden] = useState(false)
   const desktopNavRef = useRef<HTMLElement | null>(null)
   const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({})
@@ -46,25 +46,6 @@ export default function StickyTopNav() {
 
     const handleScroll = () => {
       const scrollTop = window.scrollY
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
-      const scrollProgress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0
-      setProgress(Math.min(100, Math.max(0, scrollProgress)))
-
-      const sectionEntries = navItems
-        .map((item) => item.href.replace('#', ''))
-        .map((id) => ({ id, element: document.getElementById(id) }))
-        .filter((entry): entry is { id: string; element: HTMLElement } => Boolean(entry.element))
-        .sort((a, b) => a.element.offsetTop - b.element.offsetTop)
-
-      let currentId = sectionEntries[0]?.id ?? 'hero'
-
-      sectionEntries.forEach(({ id, element }) => {
-        if (window.scrollY >= element.offsetTop - 180) {
-          currentId = id
-        }
-      })
-
-      setActiveId(currentId)
 
       if (mobileQuery.matches) {
         const delta = scrollTop - lastScrollY
@@ -82,13 +63,30 @@ export default function StickyTopNav() {
       lastScrollY = scrollTop
     }
 
+    const handleQueryChange = () => {
+      lastScrollY = window.scrollY
+      if (!mobileQuery.matches) {
+        setIsMobileNavHidden(false)
+      }
+    }
+
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleScroll)
+    window.addEventListener('resize', handleQueryChange)
+    if (typeof mobileQuery.addEventListener === 'function') {
+      mobileQuery.addEventListener('change', handleQueryChange)
+    } else {
+      mobileQuery.addListener(handleQueryChange)
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleScroll)
+      window.removeEventListener('resize', handleQueryChange)
+      if (typeof mobileQuery.removeEventListener === 'function') {
+        mobileQuery.removeEventListener('change', handleQueryChange)
+      } else {
+        mobileQuery.removeListener(handleQueryChange)
+      }
     }
   }, [])
 

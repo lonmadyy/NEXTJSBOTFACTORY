@@ -190,8 +190,9 @@ Key ownership:
   - page scroll progress
   - floating CTA visibility
   - mobile storyline visibility
-- `StickyTopNav` separately computes scroll progress and active section for nav state.
-- This means scroll-derived UI is currently computed in more than one place.
+- `ScrollUiStateProvider` is the single source of truth for active section and scroll progress.
+- Active section detection is driven by `IntersectionObserver` plus a viewport-target scoring pass instead of repeated section scans on every scroll.
+- `StickyTopNav` reads shared scroll state and only keeps its own mobile hide/show behavior and desktop pill positioning logic.
 
 ## 3D Hero
 
