@@ -3,7 +3,7 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, MeshDistortMaterial, Environment, Sphere } from '@react-three/drei'
 import { Component, ErrorInfo, ReactNode, useEffect, useRef, useState } from 'react'
-import * as THREE from 'three'
+import type { Mesh } from 'three'
 
 type WebGLBoundaryProps = {
   children: ReactNode
@@ -66,28 +66,13 @@ function canUseWebGL() {
 }
 
 function AnimatedSphere({ isMobile }: { isMobile: boolean }) {
-  const meshRef = useRef<THREE.Mesh>(null)
+  const meshRef = useRef<Mesh>(null)
   const segments = isMobile ? 36 : 64
 
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.2
       meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.3
-
-      const { x, y } = state.mouse
-      const influence = isMobile ? 0.7 : 1.5
-      const smoothing = isMobile ? 0.07 : 0.1
-
-      meshRef.current.position.x = THREE.MathUtils.lerp(
-        meshRef.current.position.x,
-        x * influence,
-        smoothing
-      )
-      meshRef.current.position.y = THREE.MathUtils.lerp(
-        meshRef.current.position.y,
-        y * influence,
-        smoothing
-      )
     }
   })
 
