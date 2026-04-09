@@ -154,10 +154,11 @@ Key ownership:
 
 ## Client / Server Boundaries
 
-- `app/layout.tsx` is a server component, but it wraps the entire app with the client component `SmoothScroll`.
+- `app/layout.tsx` is a server component and no longer wraps the entire app in home-only client runtime code.
 - The homepage is heavily client-driven.
-- Service landing pages are mostly static/server-rendered, but they still use shared layout-level client shell code.
-- Contact page is route-level static, but still inherits global client wrappers from layout.
+- `components/layout/HomeRuntimeShell.tsx` is the homepage-only client shell for smooth scroll, scroll UI state, sticky nav, floating CTA, storyline, and custom cursor.
+- Service landing pages are mostly static/server-rendered and no longer pay for homepage-only smooth-scroll/runtime shell code.
+- Contact page is route-level static and no longer inherits homepage-only client wrappers from layout.
 
 ## Animation and Scroll Infrastructure
 
@@ -174,6 +175,7 @@ Key ownership:
 ### Lenis
 
 - `SmoothScroll` lives in `components/providers/SmoothScroll.tsx`.
+- `SmoothScroll` is only mounted through `components/layout/HomeRuntimeShell.tsx` on `/`.
 - Smooth scroll is enabled only when all of the following are true:
   - `(hover: hover) and (pointer: fine)`
   - `min-width: 768px`

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Manrope, Syne } from 'next/font/google' // Premium Tech Fonts
-import SmoothScroll from '@/components/providers/SmoothScroll'
 import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
 import { primaryKeywords, siteConfig } from '@/lib/site'
 import './globals.css'
@@ -79,11 +78,7 @@ export default function RootLayout({
     <html lang="ru" className={`${syne.variable} ${manrope.variable}`}>
       <body className="bg-[#050505] text-white antialiased selection:bg-[#4F46E5] selection:text-white">
         <OrganizationJsonLd />
-        <SmoothScroll>
-          <main className="relative min-h-screen w-full overflow-x-hidden">
-            {children}
-          </main>
-        </SmoothScroll>
+        <main className="relative min-h-screen w-full overflow-x-hidden">{children}</main>
       </body>
     </html>
   )
