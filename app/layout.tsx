@@ -12,7 +12,7 @@ const syne = Syne({
 })
 
 const manrope = Manrope({
-  subsets: ['latin'],
+  subsets: ['cyrillic', 'latin'],
   variable: '--font-manrope',
   display: 'swap',
 })
