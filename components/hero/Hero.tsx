@@ -1,10 +1,19 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import HeroScene from '@/components/3d/HeroScene'
 import MagneticButton from '@/components/ui/MagneticButton'
+
+const HeroScene = dynamic(() => import('@/components/3d/HeroScene'), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(79,70,229,0.16),rgba(5,5,5,0)_58%)]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_72%,rgba(6,182,212,0.08),rgba(5,5,5,0)_62%)]" />
+    </div>
+  ),
+})
 import { buildBotDeepLink, trackBotClick } from '@/lib/bot'
 import { siteConfig } from '@/lib/site'
 
