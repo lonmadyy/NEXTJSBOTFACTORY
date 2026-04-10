@@ -58,13 +58,13 @@ export default function ServiceMockupDesktop({
           </div>
           <div className="flex-1 space-y-2">
             <div className="w-[78%] rounded-2xl rounded-bl-sm bg-white/10 px-3 py-2 font-manrope text-xs text-white/80">
-              Р—Р°РїСѓСЃРєР°СЋ РєРІРёР· Рё РїРѕРґР±РёСЂР°СЋ С‚Р°СЂРёС„
+              Запускаю квиз и подбираю тариф
             </div>
             <div className="ml-auto w-[72%] rounded-2xl rounded-br-sm bg-[#22c55e]/25 px-3 py-2 text-right font-manrope text-xs text-[#dcfce7]">
-              РќСѓР¶РµРЅ Р±РѕС‚ РґР»СЏ Р·Р°СЏРІРѕРє Рё CRM
+              Нужен бот для заявок и CRM
             </div>
             <div className="w-[82%] rounded-2xl rounded-bl-sm bg-white/10 px-3 py-2 font-manrope text-xs text-white/80">
-              Р“РѕС‚РѕРІРѕ. РЎС†РµРЅР°СЂРёР№ + РёРЅС‚РµРіСЂР°С†РёРё + Р°РЅР°Р»РёС‚РёРєР°
+              Готово. Сценарий + интеграции + аналитика
             </div>
           </div>
           <div className="mt-4 rounded-full border border-white/10 bg-black/40 px-4 py-2">
