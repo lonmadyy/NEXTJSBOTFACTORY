@@ -37,7 +37,7 @@ export default function ServicesSectionMobile() {
                     href={service.href}
                     className="inline-flex w-fit rounded-full border border-white/15 bg-white px-5 py-2.5 font-manrope text-[10px] font-bold uppercase tracking-[0.14em] text-black transition-colors hover:bg-neutral-200"
                   >
-                    РџРѕРґСЂРѕР±РЅРµРµ
+                    Подробнее
                   </Link>
                 </div>
 

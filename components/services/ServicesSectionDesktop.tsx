@@ -99,7 +99,7 @@ export default function ServicesSectionDesktop() {
                   href={service.href}
                   className="mt-1 inline-flex w-fit rounded-full border border-white/15 bg-white px-6 py-3 font-manrope text-xs font-bold uppercase tracking-[0.16em] text-black transition-colors hover:bg-neutral-200"
                 >
-                  РџРѕРґСЂРѕР±РЅРµРµ
+                  Подробнее
                 </Link>
               </div>
 
