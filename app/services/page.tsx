@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: '/services',
+    languages: {
+      'ru-BY': `${siteConfig.url}/services`,
+      'x-default': `${siteConfig.url}/services`,
+    },
   },
   openGraph: {
     title: 'Услуги BOT FACTORY в Минске',

@@ -1,6 +1,9 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Manrope, Syne } from 'next/font/google' // Premium Tech Fonts
 import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
+import { ConsentProvider } from '@/components/analytics/ConsentContext'
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
+import CookieConsent from '@/components/analytics/CookieConsent'
 import { primaryKeywords, siteConfig } from '@/lib/site'
 import './globals.css'
 
@@ -17,6 +20,16 @@ const manrope = Manrope({
   display: 'swap',
 })
 
+const yandexVerification = process.env.NEXT_PUBLIC_YANDEX_VERIFICATION
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION
+
+export const viewport: Viewport = {
+  themeColor: '#050505',
+  colorScheme: 'dark',
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -25,8 +38,13 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [...primaryKeywords],
+  manifest: '/manifest.webmanifest',
   alternates: {
     canonical: '/',
+    languages: {
+      'ru-BY': siteConfig.url,
+      'x-default': siteConfig.url,
+    },
   },
   openGraph: {
     title: siteConfig.defaultTitle,
@@ -61,6 +79,10 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
+  verification: {
+    ...(yandexVerification ? { yandex: yandexVerification } : {}),
+    ...(googleVerification ? { google: googleVerification } : {}),
+  },
   other: {
     'geo.region': 'BY-HM',
     'geo.placename': siteConfig.city,
@@ -75,10 +97,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ru" className={`${syne.variable} ${manrope.variable}`}>
+    <html lang="ru-BY" className={`${syne.variable} ${manrope.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="bg-[#050505] text-white antialiased selection:bg-[#4F46E5] selection:text-white">
-        <OrganizationJsonLd />
-        <main className="relative min-h-screen w-full overflow-x-hidden">{children}</main>
+        <ConsentProvider>
+          <OrganizationJsonLd />
+          <main className="relative min-h-screen w-full overflow-x-hidden">{children}</main>
+          <CookieConsent />
+          <GoogleAnalytics />
+        </ConsentProvider>
       </body>
     </html>
   )

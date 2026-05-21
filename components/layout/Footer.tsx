@@ -90,6 +90,12 @@ export default function Footer() {
                {siteConfig.phoneDisplay} / {siteConfig.email} <br />
                (c) 2026 Bot Factory. All rights reserved.
              </p>
+             <Link
+               href="/privacy"
+               className="mt-3 inline-block font-manrope text-xs text-neutral-500 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-white/40"
+             >
+               Политика конфиденциальности
+             </Link>
           </div>
         </div>
       </div>

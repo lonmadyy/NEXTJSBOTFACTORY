@@ -31,6 +31,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     keywords: service.keywords,
     alternates: {
       canonical: `/services/${service.slug}`,
+      languages: {
+        'ru-BY': `${siteConfig.url}/services/${service.slug}`,
+        'x-default': `${siteConfig.url}/services/${service.slug}`,
+      },
     },
     openGraph: {
       title: service.h1,

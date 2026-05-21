@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   keywords: [...primaryKeywords],
   alternates: {
     canonical: '/',
+    languages: {
+      'ru-BY': siteConfig.url,
+      'x-default': siteConfig.url,
+    },
   },
   openGraph: {
     title: 'Разработка сайтов и Telegram-ботов в Минске',

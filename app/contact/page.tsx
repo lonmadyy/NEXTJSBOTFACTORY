@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     'Свяжитесь с BOT FACTORY: обсудите разработку сайта, Telegram-бота, Mini App или AI-интеграции. Телефон, email, Telegram-бот и личный Telegram в одном месте.',
   alternates: {
     canonical: '/contact',
+    languages: {
+      'ru-BY': `${siteConfig.url}/contact`,
+      'x-default': `${siteConfig.url}/contact`,
+    },
   },
 }
 
