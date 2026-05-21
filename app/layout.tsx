@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Manrope, Onest, Syne } from 'next/font/google' // Premium Tech Fonts
+import { Manrope, Syne } from 'next/font/google' // Premium Tech Fonts
 import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
 import { ConsentProvider } from '@/components/analytics/ConsentContext'
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
@@ -18,13 +18,6 @@ const manrope = Manrope({
   subsets: ['cyrillic', 'latin'],
   variable: '--font-manrope',
   display: 'swap',
-})
-
-const onest = Onest({
-  subsets: ['cyrillic', 'latin'],
-  variable: '--font-onest',
-  display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
 })
 
 const yandexVerification = process.env.NEXT_PUBLIC_YANDEX_VERIFICATION
@@ -104,7 +97,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ru-BY" className={`${syne.variable} ${manrope.variable} ${onest.variable}`}>
+    <html lang="ru-BY" className={`${syne.variable} ${manrope.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>

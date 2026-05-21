@@ -14,7 +14,6 @@ const config: Config = {
       fontFamily: {
         syne: ["var(--font-syne)"],
         manrope: ["var(--font-manrope)"],
-        onest: ["var(--font-onest)"],
       },
     },
   },
