@@ -21,3 +21,4 @@ output/
 audit-mobile-*.png
 *.zip
 .vercel
+.tmp_*
