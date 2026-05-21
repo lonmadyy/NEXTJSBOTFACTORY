@@ -3,10 +3,11 @@ type AnalyticsValue = string | number | boolean | null | undefined
 declare global {
   interface Window {
     gtag?: (
-      command: 'event',
-      eventName: string,
+      command: 'event' | 'config' | 'consent' | 'js',
+      eventName: string | Date,
       params?: Record<string, AnalyticsValue>
     ) => void
+    dataLayer?: unknown[]
   }
 }
 
