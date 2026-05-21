@@ -6,7 +6,7 @@
 
 ### 2026-05-21 — GA4 + cookie consent
 
-**Решение:** GA4 подключается через `components/analytics/GoogleAnalytics.tsx` с использованием `next/script` (`strategy="afterInteractive"`), но скрипт не инжектится в DOM до тех пор, пока пользователь не подтвердит согласие в `CookieConsent` баннере. Согласие хранится в `localStorage` под ключом `botfactory_consent` (значения: `granted` / `denied`).
+**Решение:** GA4 подключается через `components/analytics/GoogleAnalytics.tsx` с использованием `next/script` (`strategy="afterInteractive"`), но скрипт не инжектится в DOM до тех пор, пока пользователь не подтвердит согласие в `CookieConsent` баннере. Согласие хранится в `localStorage` под ключом `botfactory_consent` (значения: `granted` / `denied`). Production Measurement ID: **`G-1DDPDVW1J7`** (property «BOT FACTORY», страна Беларусь, валюта BYN, часовой пояс GMT+03:00).
 
 **Альтернативы:** Google Tag Manager (отвергли — лишний overhead для одного счётчика), Yandex.Metrika (отвергли — пользователь выбрал только GA4), Vercel Analytics (отвергли — у пользователя нет Vercel Pro).
 
@@ -17,13 +17,27 @@
 ### 2026-05-21 — Env-имена для верификаций и аналитики
 
 **Решение:** Публичные ID и токены верификации поисковиков хранятся как `NEXT_PUBLIC_*` env-переменные:
-- `NEXT_PUBLIC_GA_ID` — Google Analytics 4 measurement ID (формат `G-XXXXXXXXXX`)
-- `NEXT_PUBLIC_YANDEX_VERIFICATION` — токен Яндекс.Вебмастера
-- `NEXT_PUBLIC_GOOGLE_VERIFICATION` — токен Google Search Console (резерв; основной способ — DNS-TXT)
+- `NEXT_PUBLIC_GA_ID=G-1DDPDVW1J7` — Google Analytics 4 measurement ID
+- `NEXT_PUBLIC_YANDEX_VERIFICATION=b882c0eb1d658410` — токен Яндекс.Вебмастера (meta-тег)
+- `NEXT_PUBLIC_GOOGLE_VERIFICATION` — пустой; Google Search Console верифицирован через `public/google44f1106d148410da.html`
+
+Все три заданы в Vercel Project Settings (Production + Preview).
 
 **Альтернативы:** хардкод значений (отвергли — нужно гибкое управление через Vercel ENV), сторонние секрет-менеджеры (избыточно для public-токенов).
 
 **Почему:** все три значения публичные (отдаются клиенту в HTML), их можно безопасно хранить в `NEXT_PUBLIC_*`. Управление — через Vercel Project Settings → Environment Variables.
+
+---
+
+### 2026-05-21 — Подключение к Google Search Console и Яндекс.Вебмастеру
+
+**Решение:**
+- **Google Search Console:** верифицирован через HTML-файл `public/google44f1106d148410da.html` (ресурс `https://botfactory.by/`, тип «Префикс URL»). Sitemap `sitemap.xml` отправлен.
+- **Яндекс.Вебмастер:** верифицирован через мета-тег (env `NEXT_PUBLIC_YANDEX_VERIFICATION`). Sitemap `https://botfactory.by/sitemap.xml` добавлен в очередь обработки. Регион Беларусь/Минск определится автоматически по `.by`-домену + geo-тегам + LocalBusiness JSON-LD (новый UI Яндекса убрал ручную настройку региона).
+
+**Альтернативы:** DNS-TXT для GSC (отвергли — у пользователя cPanel-DNS, сложнее, чем подложить файл).
+
+**Почему:** оба способа выживают при будущих ротациях DNS и не требуют доступа к регистратору домена. HTML-файл для GSC проще meta-тега через env, потому что не зависит от build-pipeline.
 
 ---
 
