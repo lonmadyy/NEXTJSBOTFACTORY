@@ -149,7 +149,7 @@ export default function Hero() {
       <div className="hero-content-shell relative z-10 flex w-full max-w-screen flex-col items-center px-2 text-center md:px-0">
         <h1
           ref={titleRef}
-          className="hero-title font-manrope text-5xl font-extrabold leading-[0.95] tracking-tight text-white mix-blend-difference [text-shadow:0_1px_0_rgba(0,0,0,0.35)]"
+          className="hero-title font-onest text-5xl font-bold leading-[0.95] tracking-[-0.025em] text-white mix-blend-difference [text-shadow:0_1px_0_rgba(0,0,0,0.35)]"
         >
           Сайты и боты, <br />
           <span className="bg-gradient-to-r from-[#4F46E5] to-[#06B6D4] bg-clip-text text-transparent">
