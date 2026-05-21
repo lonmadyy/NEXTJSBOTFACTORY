@@ -149,19 +149,19 @@ export default function Hero() {
       <div className="hero-content-shell relative z-10 flex w-full max-w-screen flex-col items-center px-2 text-center md:px-0">
         <h1
           ref={titleRef}
-          className="hero-title font-syne text-5xl font-extrabold uppercase leading-[0.9] tracking-tighter text-white mix-blend-difference"
+          className="hero-title font-manrope text-5xl font-extrabold leading-[0.95] tracking-tight text-white mix-blend-difference [text-shadow:0_1px_0_rgba(0,0,0,0.35)]"
         >
-          Architects of <br />
+          Сайты и боты, <br />
           <span className="bg-gradient-to-r from-[#4F46E5] to-[#06B6D4] bg-clip-text text-transparent">
-            Digital Intelligence
+            которые продают
           </span>
         </h1>
 
         <p
           ref={subtitleRef}
-          className="hero-subtitle mt-6 max-w-xl font-manrope text-lg font-medium uppercase tracking-widest text-neutral-400 md:mt-7"
+          className="hero-subtitle mt-6 max-w-xl font-manrope text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500 md:mt-7 md:text-sm"
         >
-          Премиальная разработка сайтов, Telegram-ботов и AI-решений для бизнеса в Минске
+          Минск · Беларусь · с 2023
         </p>
 
         <div className="hero-offer mt-6 w-full max-w-[740px] rounded-[20px] border border-white/35 bg-black/35 p-2 backdrop-blur-xl md:mt-8">

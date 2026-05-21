@@ -17,7 +17,7 @@ export default function Footer() {
         {/* Main CTA */}
         <div className="mb-20 flex flex-col items-center text-center">
             <h2 className="mb-8 font-syne text-5xl font-bold uppercase leading-none md:text-[8rem]">
-              Создадим <br /> будущее
+              Let&apos;s Build <br /> The Future
             </h2>
           <MagneticButton
             href="/contact"
