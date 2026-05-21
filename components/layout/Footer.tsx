@@ -17,7 +17,7 @@ export default function Footer() {
         {/* Main CTA */}
         <div className="mb-20 flex flex-col items-center text-center">
             <h2 className="mb-8 font-syne text-5xl font-bold uppercase leading-none md:text-[8rem]">
-              Let&apos;s Build <br /> The Future
+              Создадим <br /> будущее
             </h2>
           <MagneticButton
             href="/contact"
@@ -32,22 +32,22 @@ export default function Footer() {
           <div>
             <h3 className="mb-4 font-syne text-xl font-bold uppercase">Bot Factory</h3>
             <p className="font-manrope text-sm text-neutral-400">
-              Premium Digital Solutions <br /> Minsk, Belarus.
+              Премиальные digital-решения <br /> Минск, Беларусь.
             </p>
           </div>
 
           <div>
-            <h4 className="mb-4 font-manrope text-sm font-bold uppercase text-white/50">Services</h4>
+            <h4 className="mb-4 font-manrope text-sm font-bold uppercase text-white/50">Услуги</h4>
             <ul className="flex flex-col gap-1.5 font-manrope text-sm text-neutral-300 md:gap-2">
-              <li><Link href="/services/web-development-minsk" className="inline-flex min-h-10 items-center rounded-lg py-1 pr-2 hover:text-white md:min-h-0 md:rounded-none md:py-0 md:pr-0">Websites</Link></li>
-              <li><Link href="/services/telegram-bots-minsk" className="inline-flex min-h-10 items-center rounded-lg py-1 pr-2 hover:text-white md:min-h-0 md:rounded-none md:py-0 md:pr-0">Telegram Bots</Link></li>
+              <li><Link href="/services/web-development-minsk" className="inline-flex min-h-10 items-center rounded-lg py-1 pr-2 hover:text-white md:min-h-0 md:rounded-none md:py-0 md:pr-0">Сайты</Link></li>
+              <li><Link href="/services/telegram-bots-minsk" className="inline-flex min-h-10 items-center rounded-lg py-1 pr-2 hover:text-white md:min-h-0 md:rounded-none md:py-0 md:pr-0">Telegram-боты</Link></li>
               <li><Link href="/services/mini-apps-minsk" className="inline-flex min-h-10 items-center rounded-lg py-1 pr-2 hover:text-white md:min-h-0 md:rounded-none md:py-0 md:pr-0">Mini Apps</Link></li>
-              <li><Link href="/services/ai-integration-minsk" className="inline-flex min-h-10 items-center rounded-lg py-1 pr-2 hover:text-white md:min-h-0 md:rounded-none md:py-0 md:pr-0">AI Integration</Link></li>
+              <li><Link href="/services/ai-integration-minsk" className="inline-flex min-h-10 items-center rounded-lg py-1 pr-2 hover:text-white md:min-h-0 md:rounded-none md:py-0 md:pr-0">AI-интеграции</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="mb-4 font-manrope text-sm font-bold uppercase text-white/50">Socials</h4>
+            <h4 className="mb-4 font-manrope text-sm font-bold uppercase text-white/50">Соцсети</h4>
             <ul className="flex flex-col gap-2 font-manrope text-sm text-neutral-300">
               <li>
                 <a
@@ -83,7 +83,7 @@ export default function Footer() {
           </div>
 
           <div>
-             <h4 className="mb-4 font-manrope text-sm font-bold uppercase text-white/50">Legal</h4>
+             <h4 className="mb-4 font-manrope text-sm font-bold uppercase text-white/50">Реквизиты</h4>
              <p className="font-manrope text-xs text-neutral-500">
                {legalDisplayName} <br />
                УНП {siteConfig.unp} <br />

@@ -10,27 +10,27 @@ gsap.registerPlugin(ScrollTrigger)
 const steps = [
   {
     id: '01',
-    title: 'Consultation',
+    title: 'Консультация',
     description: 'Анализируем цели бизнеса, целевую аудиторию и технические требования проекта.',
   },
   {
     id: '02',
-    title: 'Design & UX',
+    title: 'Дизайн и UX',
     description: 'Создаём детализированные прототипы и сильную визуальную концепцию продукта.',
   },
   {
     id: '03',
-    title: 'Development',
+    title: 'Разработка',
     description: 'Разрабатываем на Next.js, GSAP и Python, затем тщательно тестируем результат.',
   },
   {
     id: '04',
-    title: 'Launch',
+    title: 'Запуск',
     description: 'Запускаем проект, настраиваем SEO и проводим финальные проверки производительности.',
   },
   {
     id: '05',
-    title: 'Support',
+    title: 'Поддержка',
     description: 'Обеспечиваем мониторинг, обновления и помощь с дальнейшим масштабированием.',
   },
 ]
@@ -110,7 +110,7 @@ export default function ProcessSection() {
       <div className="mx-auto max-w-5xl px-4 md:px-10">
         <div className="mb-20 text-center">
           <h2 className="font-syne text-4xl font-bold uppercase text-white md:text-6xl">
-            Workflow
+            Как мы работаем
           </h2>
         </div>
 

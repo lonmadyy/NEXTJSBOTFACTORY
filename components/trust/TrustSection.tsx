@@ -97,8 +97,8 @@ export default function TrustSection() {
         <div className="mb-20 flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <h2 className="font-syne text-4xl font-bold uppercase leading-none text-white md:text-6xl">
-              Trusted By <br />
-              <span className="text-neutral-500">Industry Leaders</span>
+              Нам доверяют <br />
+              <span className="text-neutral-500">лидеры рынка</span>
             </h2>
           </div>
           <div className="max-w-xs text-right">

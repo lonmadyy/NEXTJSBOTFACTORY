@@ -166,10 +166,10 @@ export default function IntegrationsSection() {
 
       <div className="mb-16 text-center">
         <h2 className="font-syne text-xl font-bold uppercase tracking-widest text-neutral-500">
-          Seamless Integrations
+          Бесшовные интеграции
         </h2>
         <p className="mt-2 font-manrope text-sm text-neutral-600">
-          Connecting your business with any system
+          Соединяем ваш бизнес с любой системой
         </p>
       </div>
 
