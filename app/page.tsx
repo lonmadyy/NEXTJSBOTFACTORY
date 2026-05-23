@@ -4,7 +4,7 @@ import HomeRuntimeShell from '@/components/layout/HomeRuntimeShell'
 import Hero from '@/components/hero/Hero'
 import TrustSection from '@/components/trust/TrustSection'
 import ServicesSection from '@/components/services/ServicesSection'
-import ProofSection from '@/components/proof/ProofSection'
+import LocalSeoSection from '@/components/seo/LocalSeoSection'
 import IntegrationsSection from '@/components/integrations/IntegrationsSection'
 import ProcessSection from '@/components/process/ProcessSection'
 import Footer from '@/components/layout/Footer'
@@ -14,9 +14,9 @@ import HomeStructuredData from '@/components/seo/HomeStructuredData'
 import { primaryKeywords, siteConfig } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Заказать сайт в Минске, Telegram-бота и AI-решения',
+  title: 'Разработка сайтов в Минске под ключ — сайты и Telegram-боты',
   description:
-    'BOT FACTORY: разработка сайтов в Минске, создание Telegram-ботов для бизнеса и внедрение AI в CRM, аналитику и автоматизацию процессов.',
+    'Разработка сайтов в Минске под ключ: лендинги, корпоративные сайты, Telegram-боты и AI-интеграции. Запуск за 1–3 недели, гарантия 2 месяца, договор. От 680 BYN.',
   keywords: [...primaryKeywords],
   alternates: {
     canonical: '/',
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Разработка сайтов и Telegram-ботов в Минске',
+    title: 'Разработка сайтов в Минске под ключ — BOT FACTORY',
     description:
-      'Закажите сайт в Минске или Telegram-бота для бизнеса. Также внедряем ИИ-чатботы, генеративный ИИ и AI-автоматизацию под бизнес-задачи.',
+      'Создаём сайты и Telegram-ботов для бизнеса в Минске. Лендинги, корпоративные сайты, AI-интеграции. От 680 BYN, запуск за 1–3 недели.',
     url: siteConfig.url,
     locale: siteConfig.locale,
     type: 'website',
@@ -47,11 +47,11 @@ export default function Home() {
       <div className="relative z-10">
         <TrustSection />
       </div>
+      <div className="relative z-10">
+        <LocalSeoSection />
+      </div>
       <div id="services" className="relative z-20">
         <ServicesSection />
-      </div>
-      <div id="proof" className="relative z-10">
-        <ProofSection />
       </div>
       <div id="integrations" className="relative z-10">
         <IntegrationsSection />
