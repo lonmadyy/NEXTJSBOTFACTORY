@@ -10,7 +10,7 @@ const testimonials = [
   },
   {
     quote:
-      'Telegram automation and integrations were delivered faster than expected, with production-level stability.',
+      'Telegram-автоматизация и интеграции — запустили быстрее ожидаемого, при этом с production-стабильностью.',
     author: 'COO, Nexora Commerce',
   },
   {
@@ -26,10 +26,10 @@ export default function ProofSection() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col gap-4 md:mb-16 md:flex-row md:items-end md:justify-between">
           <h2 className="font-syne text-4xl font-bold uppercase leading-none text-white md:text-6xl">
-            Trusted Signals
+            Нам доверяют
           </h2>
           <p className="max-w-md font-manrope text-sm uppercase tracking-[0.14em] text-neutral-500">
-            Partnerships, production launches, and long-term support retained
+            Партнёрства, продакшн-запуски и долгосрочное сопровождение
           </p>
         </div>
 

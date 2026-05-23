@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Manrope, Syne } from 'next/font/google' // Premium Tech Fonts
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/next'
 import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
 import { ConsentProvider } from '@/components/analytics/ConsentContext'
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
@@ -107,6 +109,8 @@ export default function RootLayout({
           <main className="relative min-h-screen w-full overflow-x-hidden">{children}</main>
           <CookieConsent />
           <GoogleAnalytics />
+          <SpeedInsights />
+          <Analytics />
         </ConsentProvider>
       </body>
     </html>

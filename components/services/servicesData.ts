@@ -13,7 +13,7 @@ export type ServiceItem = {
 export const services: ServiceItem[] = [
   {
     id: '01',
-    title: 'Websites',
+    title: 'Сайты',
     description:
       'Высокопроизводительные корпоративные сайты, лендинги и платформы для бизнеса в Минске и по всей Беларуси.',
     color: 'from-blue-600 to-cyan-400',
@@ -23,7 +23,7 @@ export const services: ServiceItem[] = [
   },
   {
     id: '02',
-    title: 'Telegram Bots',
+    title: 'Telegram-боты',
     description:
       'Умные боты для продаж, поддержки и автоматизации бизнеса с мультиязычностью, глубокой аналитикой и платежными интеграциями.',
     color: 'from-emerald-500 to-green-300',
@@ -33,7 +33,7 @@ export const services: ServiceItem[] = [
   },
   {
     id: '03',
-    title: 'Mini Apps',
+    title: 'Мини-приложения',
     description:
       'Полноценные веб-приложения внутри Telegram: e-commerce, crypto/Web3 и интерактивные игры с нативным UX/UI.',
     color: 'from-purple-600 to-pink-400',
@@ -43,7 +43,7 @@ export const services: ServiceItem[] = [
   },
   {
     id: '04',
-    title: 'AI Integration',
+    title: 'AI-интеграция',
     description:
       'Внедрение GPT, Machine Learning и генерации изображений. Кастомные AI-персонажи для поддержки клиентов и автоматического создания контента.',
     color: 'from-orange-500 to-red-400',
