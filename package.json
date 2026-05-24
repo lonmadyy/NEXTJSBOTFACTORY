@@ -38,6 +38,8 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@fontsource/manrope": "^5.2.8",
+    "@react-pdf/renderer": "^4.5.1",
     "@types/node": "^20.19.41",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
