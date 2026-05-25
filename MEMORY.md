@@ -4,6 +4,16 @@
 
 ---
 
+### 2026-05-25 — Яндекс.Метрика подключена параллельно с GA4
+
+**Решение:** К существующему GA4 добавлен счётчик Яндекс.Метрики через `components/analytics/YandexMetrika.tsx`. Загружается по той же схеме, что GA — через `next/script` с `strategy="afterInteractive"`, только после `ConsentProvider.status === 'granted'`. Скрипт сам по себе генерирует gtag-стиль очередь `ym()`, поэтому достаточно одного init с включёнными `clickmap`, `trackLinks`, `accurateTrackBounce`, `webvisor`. ID счётчика хранится в `NEXT_PUBLIC_YANDEX_METRIKA_ID` (число, без префиксов). Helper `trackEvent` в `lib/analytics.ts` теперь параллельно отправляет событие в обе системы — в GA4 как `gtag('event', name, params)`, в Метрику как `ym(id, 'reachGoal', name, params)`. Имя события из `trackEvent()` = имя JS-цели в кабинете Метрики (заводить вручную: `bot_click`, `sticky_cta_click`, `sticky_cta_view`).
+
+**Альтернативы:** Google Tag Manager как единая точка (отвергли — оверхед для двух счётчиков), Метрика только через `ym('hit')` без целей (отвергли — нет конверсий для Direct'a), сторонний tag manager (избыточно).
+
+**Почему:** Direct требует подключённую Метрику с целями, иначе стратегии «Максимум конверсий» / «Максимум прибыли» не работают. Метрика к тому же даёт Webvisor и карту кликов, которых нет в GA4.
+
+---
+
 ### 2026-05-21 — GA4 + cookie consent
 
 **Решение:** GA4 подключается через `components/analytics/GoogleAnalytics.tsx` с использованием `next/script` (`strategy="afterInteractive"`), но скрипт не инжектится в DOM до тех пор, пока пользователь не подтвердит согласие в `CookieConsent` баннере. Согласие хранится в `localStorage` под ключом `botfactory_consent` (значения: `granted` / `denied`). Production Measurement ID: **`G-1DDPDVW1J7`** (property «BOT FACTORY», страна Беларусь, валюта BYN, часовой пояс GMT+03:00).

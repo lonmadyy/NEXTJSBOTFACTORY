@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
 import { ConsentProvider } from '@/components/analytics/ConsentContext'
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
+import YandexMetrika from '@/components/analytics/YandexMetrika'
 import CookieConsent from '@/components/analytics/CookieConsent'
 import { primaryKeywords, siteConfig } from '@/lib/site'
 import './globals.css'
@@ -109,6 +110,7 @@ export default function RootLayout({
           <main className="relative min-h-screen w-full overflow-x-hidden">{children}</main>
           <CookieConsent />
           <GoogleAnalytics />
+          <YandexMetrika />
           <SpeedInsights />
           <Analytics />
         </ConsentProvider>
