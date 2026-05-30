@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
+import TgInit from '@/components/admin/TgInit'
 
 export const metadata: Metadata = {
   title: 'BOT FACTORY — Админка',
@@ -21,6 +22,7 @@ export default function AdminRootLayout({ children }: { children: React.ReactNod
   return (
     <div className="admin-root min-h-screen bg-[#0b0b0f] text-white">
       <Script src="https://telegram.org/js/telegram-web-app.js" strategy="afterInteractive" />
+      <TgInit />
       {children}
     </div>
   )

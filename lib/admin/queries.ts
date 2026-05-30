@@ -2,6 +2,7 @@ import 'server-only'
 import { and, count, desc, eq, ilike, or, sql } from 'drizzle-orm'
 import { db } from '@/bot/db/client'
 import {
+  adminAudit,
   leads,
   promocodes,
   quizSessions,
@@ -164,6 +165,28 @@ export async function listUsers(filters: {
 
   const total = (totalRows as unknown as Array<{ c: number }>)[0]?.c ?? 0
   return { items, total, page, pageSize }
+}
+
+export type AuditItem = {
+  id: number
+  action: string
+  entity: string | null
+  entityId: string | null
+  createdAt: Date
+}
+
+export async function getRecentAudit(limit = 12): Promise<AuditItem[]> {
+  return db
+    .select({
+      id: adminAudit.id,
+      action: adminAudit.action,
+      entity: adminAudit.entity,
+      entityId: adminAudit.entityId,
+      createdAt: adminAudit.createdAt,
+    })
+    .from(adminAudit)
+    .orderBy(desc(adminAudit.createdAt))
+    .limit(limit)
 }
 
 // Для CSV-экспорта: все пользователи без пагинации.

@@ -50,6 +50,14 @@ export const SEGMENT_LABEL: Record<string, string> = {
   ids: 'Список ID',
 }
 
+export const AUDIT_ACTION_LABEL: Record<string, string> = {
+  lead_status: 'Статус лида изменён',
+  redeem: 'Промокод погашен',
+  send_message: 'Сообщение пользователю',
+  broadcast_create: 'Рассылка создана',
+  broadcast_cancel: 'Рассылка отменена',
+}
+
 export function fmtMinsk(d: Date | string | null | undefined): string {
   if (!d) return '—'
   const date = typeof d === 'string' ? new Date(d) : d

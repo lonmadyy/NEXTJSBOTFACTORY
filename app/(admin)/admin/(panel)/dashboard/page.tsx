@@ -1,5 +1,7 @@
 import { requireAdminPage } from '@/lib/admin/guard'
 import { getDashboardData } from '@/lib/admin/analytics'
+import { getRecentAudit } from '@/lib/admin/queries'
+import { AUDIT_ACTION_LABEL, fmtMinsk } from '@/lib/admin/labels'
 import { BarList, Funnel, Kpi, Section, TimeSeries, pct } from '@/components/admin/charts'
 
 export const dynamic = 'force-dynamic'
@@ -14,7 +16,7 @@ const STATUS_LABEL: Record<string, string> = {
 
 export default async function DashboardPage() {
   await requireAdminPage()
-  const d = await getDashboardData()
+  const [d, audit] = await Promise.all([getDashboardData(), getRecentAudit(8)])
 
   const statusItems = Object.entries(d.leads.byStatus).map(([k, v]) => ({
     label: STATUS_LABEL[k] ?? k,
@@ -71,6 +73,22 @@ export default async function DashboardPage() {
         <p className="px-1 text-xs text-white/40">
           Заблокировали бота: {d.users.blocked} · отписались: {d.users.unsub}
         </p>
+      )}
+
+      {audit.length > 0 && (
+        <Section title="Последние действия">
+          <ul className="space-y-1.5 text-xs">
+            {audit.map((a) => (
+              <li key={a.id} className="flex items-center justify-between gap-2">
+                <span className="text-white/70">
+                  {AUDIT_ACTION_LABEL[a.action] ?? a.action}
+                  {a.entityId && <span className="text-white/35"> #{a.entityId}</span>}
+                </span>
+                <span className="shrink-0 text-white/35">{fmtMinsk(a.createdAt)}</span>
+              </li>
+            ))}
+          </ul>
+        </Section>
       )}
     </div>
   )
