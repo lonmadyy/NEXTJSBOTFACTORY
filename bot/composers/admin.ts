@@ -28,6 +28,22 @@ function isAdmin(ctx: MyContext): boolean {
   return !!ctx.from && ctx.from.id === ADMIN_USER_ID
 }
 
+const ADMIN_TMA_URL = `${(process.env.BOT_PUBLIC_URL ?? '').replace(/\/$/, '')}/admin`
+
+// =====================================================================
+// /admin — открыть Telegram Mini App с панелью управления
+// =====================================================================
+adminComposer.command('admin', async (ctx) => {
+  if (!isAdmin(ctx)) return
+  if (!ADMIN_TMA_URL.startsWith('https://')) {
+    await ctx.reply('BOT_PUBLIC_URL не задан или не https — Mini App нельзя открыть.')
+    return
+  }
+  await ctx.reply('🛠 Панель управления BOT FACTORY:', {
+    reply_markup: new InlineKeyboard().webApp('Открыть админку', ADMIN_TMA_URL),
+  })
+})
+
 // =====================================================================
 // /check BF-5OFF-XXXXXX — показывает профиль лида и статус промокода
 // =====================================================================

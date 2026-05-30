@@ -22,3 +22,6 @@ audit-mobile-*.png
 *.zip
 .vercel
 .tmp_*
+
+# Bot user export (содержит PII — никогда не коммитим)
+bot-users.csv

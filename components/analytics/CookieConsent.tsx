@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useConsent } from './ConsentContext'
 
 export default function CookieConsent() {
   const { status, grant, deny } = useConsent()
+  const pathname = usePathname()
   const [visible, setVisible] = useState(false)
   const [exiting, setExiting] = useState(false)
   const dialogRef = useRef<HTMLDivElement | null>(null)
@@ -24,6 +26,8 @@ export default function CookieConsent() {
     }
   }, [status, visible])
 
+  // В админ-зоне (TMA внутри Telegram) баннер не показываем.
+  if (pathname?.startsWith('/admin')) return null
   if (!visible) return null
 
   const handleAccept = () => grant()

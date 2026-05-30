@@ -34,7 +34,7 @@ export async function GET(req: Request): Promise<Response> {
     await bot.api.setWebhook(webhookUrl, {
       secret_token: expectedSecret,
       drop_pending_updates: true,
-      allowed_updates: ['message', 'callback_query'],
+      allowed_updates: ['message', 'callback_query', 'my_chat_member'],
     })
     await bot.api.setMyCommands([...BOT_COMMANDS])
     const info = await bot.api.getWebhookInfo()
