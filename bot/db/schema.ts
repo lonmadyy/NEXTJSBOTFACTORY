@@ -22,6 +22,8 @@ export const users = pgTable('users', {
   tgUsername: varchar('tg_username', { length: 64 }),
   firstName: text('first_name'),
   langCode: varchar('lang_code', { length: 8 }),
+  isBlocked: boolean('is_blocked').default(false).notNull(),
+  unsubscribedAt: timestamp('unsubscribed_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   lastSeenAt: timestamp('last_seen_at', { withTimezone: true }).defaultNow().notNull(),
 })
@@ -129,6 +131,96 @@ export const sessions = pgTable('sessions', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 })
 
+// ============================================================
+// Broadcasts — массовые рассылки (конструктор + очередь доставки)
+// ============================================================
+export type BroadcastStatus =
+  | 'draft'
+  | 'scheduled'
+  | 'sending'
+  | 'sent'
+  | 'canceled'
+  | 'failed'
+
+export type BroadcastSegmentType = 'all' | 'lead_status' | 'cluster' | 'activity' | 'ids'
+
+export type BroadcastMedia = { type: 'photo' | 'document' | 'video'; fileId: string }
+
+export type BroadcastButton = { text: string; url: string }
+
+export const broadcasts = pgTable(
+  'broadcasts',
+  {
+    id: serial('id').primaryKey(),
+    title: text('title').notNull(),
+    messageText: text('message_text').notNull(),
+    parseMode: varchar('parse_mode', { length: 12 })
+      .$type<'HTML' | 'MarkdownV2' | 'none'>()
+      .default('HTML')
+      .notNull(),
+    media: jsonb('media').$type<BroadcastMedia | null>(),
+    buttons: jsonb('buttons').$type<BroadcastButton[]>().default([]).notNull(),
+    segmentType: varchar('segment_type', { length: 16 }).$type<BroadcastSegmentType>().notNull(),
+    segmentParams: jsonb('segment_params').$type<Record<string, unknown>>().default({}).notNull(),
+    status: varchar('status', { length: 16 }).$type<BroadcastStatus>().default('draft').notNull(),
+    scheduledAt: timestamp('scheduled_at', { withTimezone: true }),
+    startedAt: timestamp('started_at', { withTimezone: true }),
+    finishedAt: timestamp('finished_at', { withTimezone: true }),
+    total: integer('total').default(0).notNull(),
+    sentCount: integer('sent_count').default(0).notNull(),
+    failedCount: integer('failed_count').default(0).notNull(),
+    blockedCount: integer('blocked_count').default(0).notNull(),
+    createdBy: bigint('created_by', { mode: 'number' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => ({
+    byStatus: index('broadcasts_status_idx').on(t.status),
+    byScheduled: index('broadcasts_scheduled_idx').on(t.scheduledAt),
+  })
+)
+
+export type RecipientStatus = 'pending' | 'sent' | 'failed' | 'blocked' | 'skipped'
+
+export const broadcastRecipients = pgTable(
+  'broadcast_recipients',
+  {
+    id: serial('id').primaryKey(),
+    broadcastId: integer('broadcast_id')
+      .notNull()
+      .references(() => broadcasts.id),
+    userId: integer('user_id')
+      .notNull()
+      .references(() => users.id),
+    tgUserId: bigint('tg_user_id', { mode: 'number' }).notNull(),
+    status: varchar('status', { length: 12 }).$type<RecipientStatus>().default('pending').notNull(),
+    error: text('error'),
+    sentAt: timestamp('sent_at', { withTimezone: true }),
+  },
+  (t) => ({
+    byBroadcastStatus: index('broadcast_recipients_bc_status_idx').on(t.broadcastId, t.status),
+  })
+)
+
+// ============================================================
+// Admin audit — лёгкий журнал действий в админке
+// ============================================================
+export const adminAudit = pgTable(
+  'admin_audit',
+  {
+    id: serial('id').primaryKey(),
+    adminId: bigint('admin_id', { mode: 'number' }),
+    action: varchar('action', { length: 48 }).notNull(),
+    entity: varchar('entity', { length: 32 }),
+    entityId: varchar('entity_id', { length: 64 }),
+    meta: jsonb('meta').$type<Record<string, unknown>>(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => ({
+    byCreated: index('admin_audit_created_idx').on(t.createdAt),
+  })
+)
+
 export type UserRow = typeof users.$inferSelect
 export type NewUserRow = typeof users.$inferInsert
 export type LeadRow = typeof leads.$inferSelect
@@ -136,3 +228,7 @@ export type NewLeadRow = typeof leads.$inferInsert
 export type QuizSessionRow = typeof quizSessions.$inferSelect
 export type PromocodeRow = typeof promocodes.$inferSelect
 export type AdminNotificationRow = typeof adminNotifications.$inferSelect
+export type BroadcastRow = typeof broadcasts.$inferSelect
+export type NewBroadcastRow = typeof broadcasts.$inferInsert
+export type BroadcastRecipientRow = typeof broadcastRecipients.$inferSelect
+export type AdminAuditRow = typeof adminAudit.$inferSelect

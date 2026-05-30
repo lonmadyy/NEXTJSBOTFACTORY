@@ -65,6 +65,7 @@ export const BOT_COMMANDS = [
 export const BOT_ADMIN_COMMANDS = [
   { command: 'start', description: 'Начало — квиз или FAQ' },
   { command: 'promo', description: 'Получить промокод -5%' },
+  { command: 'admin', description: 'Открыть панель управления (admin)' },
   { command: 'check', description: 'Проверить промокод (admin)' },
   { command: 'redeem', description: 'Погасить промокод (admin)' },
 ] as const
