@@ -2,6 +2,7 @@ import 'server-only'
 import { Bot, session } from 'grammy'
 import { adminComposer } from './composers/admin'
 import { faqComposer } from './composers/faq'
+import { membershipComposer } from './composers/membership'
 import { promocodeComposer } from './composers/promocode'
 import { quizComposer } from './composers/quiz'
 import { startComposer } from './composers/start'
@@ -33,6 +34,9 @@ export function getBot(): Bot<MyContext> {
       },
     })
   )
+
+  // Отслеживание блокировки бота (my_chat_member) — независимо от текстовых апдейтов.
+  bot.use(membershipComposer)
 
   // Порядок важен: admin сначала (его /redeem может ловить force-reply text),
   // затем все остальные composers, затем fallback.
