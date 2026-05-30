@@ -180,7 +180,13 @@ export const broadcasts = pgTable(
   })
 )
 
-export type RecipientStatus = 'pending' | 'sent' | 'failed' | 'blocked' | 'skipped'
+export type RecipientStatus =
+  | 'pending'
+  | 'processing'
+  | 'sent'
+  | 'failed'
+  | 'blocked'
+  | 'skipped'
 
 export const broadcastRecipients = pgTable(
   'broadcast_recipients',
