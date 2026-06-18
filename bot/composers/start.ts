@@ -1,6 +1,7 @@
 import 'server-only'
 import { Composer, InlineKeyboard } from 'grammy'
 import { BTN, WELCOME } from '../copy/ru'
+import { upsertUser } from '../services/lead-service'
 import type { EntryUtm, MyContext } from '../types'
 
 export const startComposer = new Composer<MyContext>()
@@ -39,6 +40,21 @@ startComposer.command('start', async (ctx) => {
   const entry = decodeStartPayload(typeof payloadRaw === 'string' ? payloadRaw : undefined)
 
   ctx.session.entryUtm = entry
+
+  // Фиксируем пользователя сразу на /start — даже если он не пойдёт в квиз.
+  if (ctx.from) {
+    try {
+      const user = await upsertUser({
+        tgUserId: ctx.from.id,
+        tgUsername: ctx.from.username ?? null,
+        firstName: ctx.from.first_name ?? null,
+        langCode: ctx.from.language_code ?? null,
+      })
+      ctx.session.userId = user.id
+    } catch (err) {
+      console.error('[start] upsertUser failed:', err)
+    }
+  }
 
   const firstName = ctx.from?.first_name
   await ctx.reply(WELCOME(firstName), {
