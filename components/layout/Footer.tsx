@@ -6,8 +6,6 @@ import MagneticButton from '@/components/ui/MagneticButton'
 import { siteConfig } from '@/lib/site'
 
 export default function Footer() {
-  const legalDisplayName = siteConfig.legalName.replace(/^ИП\s+/i, '')
-
   return (
     <footer className="relative bg-[#050505] pt-20 text-white overflow-hidden">
       {/* Background Gradient */}
@@ -85,7 +83,7 @@ export default function Footer() {
           <div>
              <h4 className="mb-4 font-manrope text-sm font-bold uppercase text-white/50">Реквизиты</h4>
              <p className="font-manrope text-xs text-neutral-400">
-               {legalDisplayName} <br />
+               {siteConfig.legalName} <br />
                УНП {siteConfig.unp} <br />
                {siteConfig.phoneDisplay} / {siteConfig.email} <br />
                (c) 2026 Bot Factory. All rights reserved.
