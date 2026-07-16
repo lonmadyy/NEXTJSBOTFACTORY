@@ -105,8 +105,8 @@ export default function TrustSection() {
              <p className="font-manrope text-sm uppercase tracking-widest text-neutral-400">
               Est. 2026 / УНП HE7170411
             </p>
-             <p className="font-manrope text-xs text-neutral-600 mt-2">
-              Legal Entity: Shevelev Egor
+             <p className="font-manrope text-xs text-neutral-500 mt-2">
+              Шевелёв Е. В.
             </p>
           </div>
         </div>

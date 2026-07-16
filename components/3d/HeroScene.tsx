@@ -36,7 +36,7 @@ class WebGLBoundary extends Component<WebGLBoundaryProps, WebGLBoundaryState> {
 
 function HeroSceneFallback() {
   return (
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(79,70,229,0.16),rgba(5,5,5,0)_58%)]">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(79,70,229,0.16),rgba(5,5,5,0)_58%)]" aria-hidden="true">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_72%,rgba(6,182,212,0.08),rgba(5,5,5,0)_62%)]" />
     </div>
   )

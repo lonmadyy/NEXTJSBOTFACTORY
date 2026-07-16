@@ -35,18 +35,18 @@ export default function EeatSection() {
 
             <div className="mt-8 space-y-4 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
               <p className="font-manrope text-sm text-neutral-300">
-                <span className="text-white">Experience:</span> более 100 реализованных проектов.
+                <span lang="en" className="text-white">Experience:</span> более 100 реализованных проектов.
               </p>
               <p className="font-manrope text-sm text-neutral-300">
-                <span className="text-white">Expertise:</span> web-разработка, Telegram-боты,
+                <span lang="en" className="text-white">Expertise:</span> web-разработка, Telegram-боты,
                 AI-интеграции и CRM/API связки.
               </p>
               <p className="font-manrope text-sm text-neutral-300">
-                <span className="text-white">Authoritativeness:</span> работаем официально,
+                <span lang="en" className="text-white">Authoritativeness:</span> работаем официально,
                 зарегистрированы в Республике Беларусь.
               </p>
               <p className="font-manrope text-sm text-neutral-300">
-                <span className="text-white">Trust:</span> договор, гарантия, и понятные этапы
+                <span lang="en" className="text-white">Trust:</span> договор, гарантия, и понятные этапы
                 проекта.
               </p>
             </div>

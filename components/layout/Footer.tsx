@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 pb-10 md:px-10">
         {/* Main CTA */}
         <div className="mb-20 flex flex-col items-center text-center">
-            <h2 className="mb-8 font-syne text-5xl font-bold uppercase leading-none md:text-[8rem]">
+            <h2 lang="en" className="mb-8 font-syne text-5xl font-bold uppercase leading-none md:text-[8rem]">
               Let&apos;s Build <br /> The Future
             </h2>
           <MagneticButton
@@ -84,7 +84,7 @@ export default function Footer() {
 
           <div>
              <h4 className="mb-4 font-manrope text-sm font-bold uppercase text-white/50">Реквизиты</h4>
-             <p className="font-manrope text-xs text-neutral-500">
+             <p className="font-manrope text-xs text-neutral-400">
                {legalDisplayName} <br />
                УНП {siteConfig.unp} <br />
                {siteConfig.phoneDisplay} / {siteConfig.email} <br />
@@ -92,7 +92,7 @@ export default function Footer() {
              </p>
              <Link
                href="/privacy"
-               className="mt-3 inline-block font-manrope text-xs text-neutral-500 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-white/40"
+               className="mt-3 inline-block font-manrope text-xs text-neutral-400 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-white/40"
              >
                Политика конфиденциальности
              </Link>

@@ -92,7 +92,7 @@ export default function ServiceMockupDesktop({
             <p className="font-manrope text-[9px] uppercase tracking-[0.15em] text-white/50">
               Mini app event
             </p>
-            <h4 className="mt-1 font-syne text-sm uppercase text-white">Flash Drop</h4>
+            <div className="mt-1 font-syne text-sm uppercase text-white">Flash Drop</div>
             <div className="mt-2 flex items-center justify-between">
               <span className="font-manrope text-xs text-white/80">TWA Storefront</span>
               <span className="rounded-full border border-white/20 bg-white/10 px-2 py-0.5 font-manrope text-[9px] uppercase text-fuchsia-200">

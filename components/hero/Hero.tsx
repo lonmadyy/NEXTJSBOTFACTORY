@@ -149,6 +149,7 @@ export default function Hero() {
       <div className="hero-content-shell relative z-10 flex w-full max-w-screen flex-col items-center px-2 text-center md:px-0">
         <h1
           ref={titleRef}
+          lang="en"
           className="hero-title font-syne text-5xl font-extrabold uppercase leading-[0.9] tracking-tighter text-white mix-blend-difference"
         >
           Architects of <br />
@@ -244,7 +245,7 @@ export default function Hero() {
       </div>
 
       <div className="hero-scroll-indicator absolute bottom-10 left-1/2 flex -translate-x-1/2 animate-bounce flex-col items-center gap-2 opacity-50">
-        <span className="text-xs uppercase tracking-[0.2em] text-neutral-500">Scroll</span>
+        <span lang="en" className="text-xs uppercase tracking-[0.2em] text-neutral-400">Scroll</span>
         <div className="h-10 w-[1px] bg-gradient-to-b from-transparent via-white to-transparent" />
       </div>
     </section>

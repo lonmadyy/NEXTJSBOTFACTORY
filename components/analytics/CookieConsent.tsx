@@ -102,14 +102,14 @@ export default function CookieConsent() {
         <button
           type="button"
           onClick={handleDeny}
-          className="inline-flex h-10 items-center justify-center rounded-full border border-white/15 px-4 text-[13px] font-medium text-white/80 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-white/15 px-4 text-[13px] font-medium text-white/80 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
         >
           Только необходимые
         </button>
         <button
           type="button"
           onClick={handleAccept}
-          className="inline-flex h-10 flex-1 items-center justify-center rounded-full bg-white px-4 text-[13px] font-semibold tracking-tight text-black transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 sm:flex-none"
+          className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-full bg-white px-4 text-[13px] font-semibold tracking-tight text-black transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 sm:flex-none"
         >
           Принять
         </button>

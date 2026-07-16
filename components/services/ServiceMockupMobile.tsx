@@ -31,7 +31,7 @@ export default function ServiceMockupMobile({
                 <p className="font-manrope text-[9px] uppercase tracking-[0.14em] text-white/55">
                   landing page
                 </p>
-                <h4 className="mt-1 font-syne text-sm uppercase leading-none text-white">{title}</h4>
+                <div className="mt-1 font-syne text-sm uppercase leading-none text-white">{title}</div>
                 <div className="mt-2.5 h-2 w-14 rounded-full bg-white/30" />
                 <div className="mt-1.5 h-2 w-10 rounded-full bg-white/15" />
                 <div className="mt-2.5 inline-flex rounded-full border border-white/15 bg-black/20 px-2.5 py-1 font-manrope text-[8px] uppercase tracking-[0.16em] text-white/80">
@@ -93,7 +93,7 @@ export default function ServiceMockupMobile({
 
           <div className="mt-2.5 rounded-[1rem] border border-white/10 bg-white/[0.04] p-2.5">
             <p className="font-manrope text-[8px] uppercase tracking-[0.16em] text-white/42">mini app</p>
-            <h4 className="mt-1 font-syne text-sm uppercase text-white">Flash Drop</h4>
+            <div className="mt-1 font-syne text-sm uppercase text-white">Flash Drop</div>
             <div className="mt-2 grid grid-cols-2 gap-2">
               <div className="rounded-xl bg-gradient-to-br from-indigo-500/30 to-blue-400/25 p-2">
                 <div className="h-7 rounded-lg bg-white/10" />

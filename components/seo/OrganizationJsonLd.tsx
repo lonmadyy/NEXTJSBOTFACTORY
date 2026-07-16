@@ -14,7 +14,7 @@ export default function OrganizationJsonLd() {
     priceRange: '680–9000 BYN',
     currenciesAccepted: 'BYN, USD, EUR, RUB',
     paymentAccepted: 'Bank transfer, ERIP, Cash',
-    foundingDate: '2023',
+    foundingDate: '2026',
     knowsLanguage: ['ru', 'be', 'en'],
     taxID: siteConfig.unp,
     areaServed: [

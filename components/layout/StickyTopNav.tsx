@@ -6,7 +6,6 @@ import { useScrollUiState } from '@/components/layout/ScrollUiStateProvider'
 const navItems = [
   { href: '#hero', label: 'Главная' },
   { href: '#services', label: 'Услуги' },
-  { href: '#proof', label: 'Доверие' },
   { href: '#integrations', label: 'Интеграции' },
   { href: '#workflow', label: 'Процесс' },
   { href: '#contact', label: 'Контакты' },

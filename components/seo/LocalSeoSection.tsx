@@ -44,7 +44,7 @@ export default function LocalSeoSection() {
               и AI-ассистентов. Запуск за 1–3 недели, гарантия 2 месяца, фиксированный договор. От 680 BYN.
             </p>
           </div>
-          <p className="font-manrope text-xs uppercase tracking-[0.2em] text-neutral-600 md:text-right">
+          <p className="font-manrope text-xs uppercase tracking-[0.2em] text-neutral-500 md:text-right">
             Минск · Беларусь <br /> УНП HE7170411
           </p>
         </div>

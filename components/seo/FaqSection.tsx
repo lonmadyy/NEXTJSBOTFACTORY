@@ -13,7 +13,7 @@ export default function FaqSection() {
           <h2 className="font-syne text-4xl font-bold uppercase text-white md:text-6xl">
             Часто задаваемые вопросы
           </h2>
-          <p className="mt-3 font-manrope text-neutral-500">
+          <p className="mt-3 font-manrope text-neutral-400">
             Актуально для проектов в Минске и по всей Беларуси
           </p>
         </div>

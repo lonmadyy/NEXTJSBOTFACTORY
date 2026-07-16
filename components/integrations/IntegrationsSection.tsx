@@ -168,7 +168,7 @@ export default function IntegrationsSection() {
         <h2 className="font-syne text-xl font-bold uppercase tracking-widest text-neutral-500">
           Бесшовные интеграции
         </h2>
-        <p className="mt-2 font-manrope text-sm text-neutral-600">
+        <p className="mt-2 font-manrope text-sm text-neutral-500">
           Соединяем ваш бизнес с любой системой
         </p>
       </div>
