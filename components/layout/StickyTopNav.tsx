@@ -15,6 +15,7 @@ const navItems = [
 export default function StickyTopNav() {
   const { progress, storyActiveId: activeId } = useScrollUiState()
   const [isMobileNavHidden, setIsMobileNavHidden] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const desktopNavRef = useRef<HTMLElement | null>(null)
   const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({})
   const [pillStyle, setPillStyle] = useState({ x: 0, width: 0, opacity: 0 })
@@ -49,6 +50,9 @@ export default function StickyTopNav() {
 
       if (mobileQuery.matches) {
         const delta = scrollTop - lastScrollY
+        if (Math.abs(delta) > 6) {
+          setIsMenuOpen(false)
+        }
         if (scrollTop < 48) {
           setIsMobileNavHidden(false)
         } else if (delta > 6) {
@@ -65,6 +69,7 @@ export default function StickyTopNav() {
 
     const handleQueryChange = () => {
       lastScrollY = window.scrollY
+      setIsMenuOpen(false)
       if (!mobileQuery.matches) {
         setIsMobileNavHidden(false)
       }
@@ -103,6 +108,17 @@ export default function StickyTopNav() {
       window.removeEventListener('resize', update)
     }
   }, [updateDesktopPill])
+
+  useEffect(() => {
+    if (!isMenuOpen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMenuOpen(false)
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isMenuOpen])
 
   return (
     <>
@@ -162,35 +178,82 @@ export default function StickyTopNav() {
             </nav>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-[#090909]/72 px-2 py-1 backdrop-blur-xl md:hidden">
-            <a
-              href="#hero"
-              className="mb-0.5 inline-flex h-5 w-full items-center justify-center rounded-md border border-white/10 bg-white/[0.03] px-2 py-0 text-center font-syne text-[8px] font-bold uppercase tracking-[0.14em] text-white/85 [text-shadow:0_0_8px_rgba(6,182,212,0.4)]"
-            >
-              Bot Factory
-            </a>
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#090909]/80 backdrop-blur-xl md:hidden">
+            <div className="flex items-center justify-between px-3 py-2">
+              <a
+                href="#hero"
+                onClick={() => setIsMenuOpen(false)}
+                className="font-syne text-[11px] font-bold uppercase tracking-[0.2em] text-white/90 [text-shadow:0_0_8px_rgba(6,182,212,0.4)]"
+              >
+                Bot Factory
+              </a>
 
-            <nav className="grid grid-cols-6 items-center gap-x-0.5 gap-y-0">
-              {navItems.map((item) => {
-                const id = item.href.replace('#', '')
-                const isActive = activeId === id
-
-                return (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className={`flex h-6 w-full items-center justify-center rounded-md px-0.5 py-0 text-center font-manrope text-[7px] uppercase tracking-[0.03em] transition-colors ${
-                      isActive ? 'bg-white/12 text-white' : 'text-white/60'
+              <button
+                type="button"
+                aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
+                aria-expanded={isMenuOpen}
+                aria-controls="mobile-nav-panel"
+                onClick={() => setIsMenuOpen((open) => !open)}
+                className="-mr-1 flex h-9 w-9 items-center justify-center rounded-lg text-white/85 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
+              >
+                <span aria-hidden="true" className="relative block h-4 w-5">
+                  <span
+                    className={`absolute left-0 block h-[2px] w-5 rounded-full bg-current motion-safe:transition-transform motion-safe:duration-300 ${
+                      isMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-1'
                     }`}
-                  >
-                    {item.label}
-                  </a>
-                )
-              })}
-            </nav>
+                  />
+                  <span
+                    className={`absolute left-0 block h-[2px] w-5 rounded-full bg-current motion-safe:transition-transform motion-safe:duration-300 ${
+                      isMenuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-1'
+                    }`}
+                  />
+                </span>
+              </button>
+            </div>
+
+            <div
+              id="mobile-nav-panel"
+              aria-hidden={!isMenuOpen}
+              className={`grid motion-safe:transition-[grid-template-rows,opacity] motion-safe:duration-300 motion-safe:ease-out ${
+                isMenuOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+              }`}
+            >
+              <nav className="overflow-hidden">
+                <ul className="flex flex-col gap-1 px-2 pb-2">
+                  {navItems.map((item) => {
+                    const id = item.href.replace('#', '')
+                    const isActive = activeId === id
+
+                    return (
+                      <li key={item.href}>
+                        <a
+                          href={item.href}
+                          aria-current={isActive ? 'true' : undefined}
+                          tabIndex={isMenuOpen ? undefined : -1}
+                          onClick={() => setIsMenuOpen(false)}
+                          className={`flex min-h-[44px] items-center rounded-lg px-3 font-manrope text-[13px] font-medium uppercase tracking-[0.08em] transition-colors ${
+                            isActive ? 'bg-white/12 text-white' : 'text-white/65 hover:text-white'
+                          }`}
+                        >
+                          {item.label}
+                        </a>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
       </header>
+
+      {isMenuOpen && (
+        <div
+          aria-hidden="true"
+          onClick={() => setIsMenuOpen(false)}
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
+        />
+      )}
     </>
   )
 }
