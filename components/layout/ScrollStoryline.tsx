@@ -13,10 +13,9 @@ type StoryStep = {
 const storySteps: StoryStep[] = [
   { id: 'hero', code: '01', label: 'Главная', rgb: '79 70 229' },
   { id: 'services', code: '02', label: 'Услуги', rgb: '14 165 233' },
-  { id: 'proof', code: '03', label: 'Доверие', rgb: '16 185 129' },
-  { id: 'integrations', code: '04', label: 'Интеграции', rgb: '6 182 212' },
-  { id: 'workflow', code: '05', label: 'Процесс', rgb: '245 158 11' },
-  { id: 'contact', code: '06', label: 'Контакты', rgb: '236 72 153' },
+  { id: 'integrations', code: '03', label: 'Интеграции', rgb: '6 182 212' },
+  { id: 'workflow', code: '04', label: 'Процесс', rgb: '245 158 11' },
+  { id: 'contact', code: '05', label: 'Контакты', rgb: '236 72 153' },
 ]
 
 export default function ScrollStoryline() {
